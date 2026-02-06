@@ -1,0 +1,158 @@
+{
+  "description": "Sample telemetry events demonstrating various scenarios",
+  "scenarios": {
+    "normal_sequence": [
+      {
+        "device_id": "meter-001",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 1000.0,
+        "unit": "kWh"
+      },
+      {
+        "device_id": "meter-001",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T11:00:00Z",
+        "metric_type": "energy",
+        "value": 1012.5,
+        "unit": "kWh"
+      },
+      {
+        "device_id": "meter-001",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "metric_type": "energy",
+        "value": 1025.3,
+        "unit": "kWh"
+      }
+    ],
+    "duplicate_event": {
+      "description": "Send this twice - second attempt should return duplicate status",
+      "event": {
+        "device_id": "meter-002",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 500.0,
+        "unit": "kWh"
+      }
+    },
+    "counter_reset": [
+      {
+        "description": "Normal reading",
+        "device_id": "meter-003",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 9950.0,
+        "unit": "kWh"
+      },
+      {
+        "description": "Counter reset - value drops (e.g., meter replaced)",
+        "device_id": "meter-003",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T11:00:00Z",
+        "metric_type": "energy",
+        "value": 50.0,
+        "unit": "kWh"
+      },
+      {
+        "description": "Continues from new baseline",
+        "device_id": "meter-003",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "metric_type": "energy",
+        "value": 65.5,
+        "unit": "kWh"
+      }
+    ],
+    "out_of_order": [
+      {
+        "description": "First event at 10:00",
+        "device_id": "meter-004",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 2000.0,
+        "unit": "kWh"
+      },
+      {
+        "description": "Third event at 12:00",
+        "device_id": "meter-004",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T12:00:00Z",
+        "metric_type": "energy",
+        "value": 2050.0,
+        "unit": "kWh"
+      },
+      {
+        "description": "Late arrival - should be inserted between and flagged",
+        "device_id": "meter-004",
+        "building_id": "building-b",
+        "timestamp": "2026-01-15T11:00:00Z",
+        "metric_type": "energy",
+        "value": 2025.0,
+        "unit": "kWh"
+      }
+    ],
+    "unit_conversions": [
+      {
+        "description": "Wh to kWh conversion",
+        "device_id": "meter-005",
+        "building_id": "building-c",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 5000,
+        "unit": "Wh"
+      },
+      {
+        "description": "MWh to kWh conversion",
+        "device_id": "meter-006",
+        "building_id": "building-c",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 2.5,
+        "unit": "MWh"
+      }
+    ],
+    "multiple_buildings": [
+      {
+        "device_id": "meter-007",
+        "building_id": "building-d",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 3000.0,
+        "unit": "kWh"
+      },
+      {
+        "device_id": "meter-008",
+        "building_id": "building-d",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 3500.0,
+        "unit": "kWh"
+      }
+    ],
+    "suspicious_jump": [
+      {
+        "description": "Normal reading",
+        "device_id": "meter-009",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T10:00:00Z",
+        "metric_type": "energy",
+        "value": 1000.0,
+        "unit": "kWh"
+      },
+      {
+        "description": "Very large jump - should be flagged but delta computed",
+        "device_id": "meter-009",
+        "building_id": "building-a",
+        "timestamp": "2026-01-15T11:00:00Z",
+        "metric_type": "energy",
+        "value": 12000.0,
+        "unit": "kWh"
+      }
+    ]
+  }
+}
