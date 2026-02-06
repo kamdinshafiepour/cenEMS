@@ -14,37 +14,29 @@ Energy monitoring telemetry ingestion and normalization service with counter res
 
 ## Quick Start
 
-### Prerequisites
-- Docker & Docker Compose
+**Prerequisites:** Docker & Docker Compose
 
-### Run
+**1. Start the system:**
 ```bash
-docker-compose up --build
+docker-compose up
 ```
 
-Access:
-- Backend API: http://localhost:8000/docs
+**2. Load example data:**
+
+Open a new terminal and run:
+```bash
+# Windows
+examples\api-examples.bat
+
+# Mac/Linux
+bash examples/api-examples.sh
+```
+
+**3. View the dashboard:**
 - Frontend: http://localhost:5173
-- PostgreSQL: localhost:5432
+- API Docs: http://localhost:8000/docs
 
-### Local Development (Optional)
-```bash
-# Start database
-docker-compose up postgres -d
-
-# Backend setup
-cd backend
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-pip install -r requirements.txt
-alembic upgrade head
-uvicorn app.main:app --reload
-
-# Frontend setup
-cd frontend
-npm install
-npm run dev
-```
+The dashboard shows buildings, devices, and time-series energy charts with quality flags (counter resets, out-of-order events).
 
 ## API Endpoints
 
