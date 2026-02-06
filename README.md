@@ -65,17 +65,23 @@ Request:
 
 Response: `201 Created` or `200 OK` (duplicate)
 
-### GET /latest?device_id=X&metric_type=energy
+### GET /latest
 Get most recent reading with quality flags and delta.
 
-### GET /timeseries?device_id=X&metric_type=energy&start=...&end=...
+Query parameters: `device_id`, `metric_type`
+
+### GET /timeseries
 Get historical measurements with quality metadata.
+
+Query parameters: `device_id`, `metric_type`, `start`, `end`
 
 ### GET /buildings
 List all buildings with device counts.
 
-### GET /devices?building_id=X
+### GET /devices
 List devices in a building.
+
+Query parameters: `building_id`
 
 ## Testing
 
